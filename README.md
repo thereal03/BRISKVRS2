@@ -14,22 +14,30 @@ This project aims to educate children about disaster preparedness in an engaging
 
 Here are the design mockups used for the project:
 
-### 🧩 Home Page
-![Home Page](./mockup/home.png)
+### 🏠 Home Page (Mockup & Wireframe)
+![Home Mockup](./Mockup/Home%20Mockup.png)
+![Home Wireframe](./Mockup/Home%20Wireframe.png)
 
-### 🧩 Gameplay Interface
-![Gameplay Interface](./mockup/gameplay.png)
+### 👥 About Us (Mockup & Wireframe)
+![About Us Mockup](./Mockup/About%20Us%20Mockup.png)
+![About Us Wireframe](./Mockup/About%20Us%20Wireframe.png)
 
-### 🧩 Login Page
-![Login Page](./mockup/login.png)
+### 🔐 Login Page (Mockup & Wireframe)
+![Login Mockup](./Mockup/Login%20Mockup.png)
+![Login Wireframe](./Mockup/Login%20Wireframe.png)
 
-### 🧩 Dashboard
-![Dashboard](./mockup/dashboard.png)
+### 📅 Reservation Status (Mockup & Wireframe)
+![Reservation Status Mockup](./Mockup/Reservation%20Status%20Mockup.png)
+![Reservation Status Wireframe](./Mockup/Reservation%20Status%20Wireframe.png)
 
-### 🧩 Results Screen
-![Results Screen](./mockup/results.png)
+### 📝 Sign Up (Mockup & Wireframe)
+![Sign Up Mockup](./Mockup/Sign%20Up%20Mockup.png)
+![Sign Up Wireframe](./Mockup/Sign%20Up%20Wireframe.png)
 
-> 📌 *All images are stored in the `/mockup` folder.*
+### 🎨 Other
+![Artboard 1](./Mockup/Artboard%201.png)
+
+> 📌 *All images are stored in the `/Mockup` folder.*
 
 ---
 
