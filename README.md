@@ -1,12 +1,12 @@
-# BRISKVRS2 – Disaster Risk Management Web Game
+# BRISKVRS2 – Online Car Rental Reservation System
 
-A gamified web platform to help children learn disaster risk management through interactive gameplay and simulations.
+A web-based reservation platform that allows users to book, manage, and track car rental services efficiently.
 
 ---
 
-## 🎮 Project Overview
+## 🚗 Project Overview
 
-This project aims to educate children about disaster preparedness in an engaging and interactive way.
+This project is designed to streamline car rental reservations through a responsive and easy-to-use interface. It includes modules for sign-up, login, car availability, and reservation tracking.
 
 ---
 
@@ -16,26 +16,46 @@ Here are the design mockups used for the project:
 
 ### 🏠 Home Page (Mockup & Wireframe)
 ![Home Mockup](./Mockup/Home%20Mockup.png)
+
+<br>
+
 ![Home Wireframe](./Mockup/Home%20Wireframe.png)
+
+---
 
 ### 👥 About Us (Mockup & Wireframe)
 ![About Us Mockup](./Mockup/About%20Us%20Mockup.png)
+
+<br>
+
 ![About Us Wireframe](./Mockup/About%20Us%20Wireframe.png)
+
+---
 
 ### 🔐 Login Page (Mockup & Wireframe)
 ![Login Mockup](./Mockup/Login%20Mockup.png)
+
+<br>
+
 ![Login Wireframe](./Mockup/Login%20Wireframe.png)
+
+---
 
 ### 📅 Reservation Status (Mockup & Wireframe)
 ![Reservation Status Mockup](./Mockup/Reservation%20Status%20Mockup.png)
+
+<br>
+
 ![Reservation Status Wireframe](./Mockup/Reservation%20Status%20Wireframe.png)
+
+---
 
 ### 📝 Sign Up (Mockup & Wireframe)
 ![Sign Up Mockup](./Mockup/Sign%20Up%20Mockup.png)
-![Sign Up Wireframe](./Mockup/Sign%20Up%20Wireframe.png)
 
-### 🎨 Other
-![Artboard 1](./Mockup/Artboard%201.png)
+<br>
+
+![Sign Up Wireframe](./Mockup/Sign%20Up%20Wireframe.png)
 
 > 📌 *All images are stored in the `/Mockup` folder.*
 
@@ -52,8 +72,8 @@ Here are the design mockups used for the project:
 ## 👨‍💻 Author
 
 **Daryll Medina**  
-[GitHub Profile](https://github.com/yourusername)  
-[Portfolio](https://darylportfolio.netlify.app/)
+[GitHub Profile](https://github.com/thereal03)  
+[Portfolio](https://daryllportfolio.netlify.app/)
 
 ---
 
