@@ -65,7 +65,7 @@ Here are the design mockups used for the project:
 
 - HTML5, CSS3, JavaScript
 - PHP & MySQL
-- Figma for UI design
+- Adobe XD for UI design
 
 ---
 
