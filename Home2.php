@@ -27,87 +27,6 @@ mysqli_close($conn);
 ?>
 
 <?php
-// // Connect to the database
-// $conn = mysqli_connect("localhost", "root", "", "dbbriskvrs");
-
-// // Check connection
-// if (!$conn) {
-//    die("Connection failed: " . mysqli_connect_error());
-// }
-
-// // Check if the form is submitted and if the reservation was updated successfully
-// if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['updated'])) {
-//    $updated_reservation_id = $_POST['reservation_id'];
-//    $query = "SELECT pickup_date, return_date FROM tblReservation WHERE reservation_id = $updated_reservation_id";
-//    $result = mysqli_query($conn, $query);
-//    if (!$result) {
-//       die("Error executing query: " . mysqli_error($conn));
-//    }
-//    $reservation = mysqli_fetch_assoc($result);
-//    $pickup_date = $reservation['pickup_date'];
-//    $return_date = $reservation['return_date'];
-// } else {
-//    $pickup_date = '';
-//    $return_date = '';
-// }
-
-// // Check if the form is submitted
-// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//    if (isset($_POST['reserve'])) {
-//       // Get the reservation data from the form
-//       $user_id = $_SESSION['user_id'];
-//       $car_id = $_POST['model'];
-//       $destination = $_POST['destination'];
-//       $pickup_date_string = $_POST['pickup_date'];
-//       $return_date_string = $_POST['return_date'];
-
-//       // Parse pickup date and return date strings to DateTime objects
-//       $pickup_date = DateTime::createFromFormat('Y-m-d\TH:i', $pickup_date_string);
-//       $return_date = DateTime::createFromFormat('Y-m-d\TH:i', $return_date_string);
-
-//       // Check if pickup date and return date are valid
-//       if (!$pickup_date || !$return_date) {
-//          die("Invalid date format: $pickup_date_string or $return_date_string");
-//       }
-
-//       // Calculate rental days and total cost
-//       $diff = $return_date->diff($pickup_date);
-//       $rental_days = $diff->days;
-
-//       if ($rental_days < 1) {
-//          $total_cost = 1500;
-//       } else {
-//          $query = "SELECT daily_rate FROM tblCar WHERE car_id = $car_id";
-//          $result = mysqli_query($conn, $query);
-//          $row = mysqli_fetch_assoc($result);
-//          $total_cost = $row['daily_rate'] * $rental_days;
-//       }
-
-//       // Insert the reservation data into the database
-//       $query = "INSERT INTO tblReservation (user_id, car_id, destination, pickup_date, return_date, rental_days, total_cost, reservation_date)
-//                  VALUES ($user_id, $car_id, '$destination', '$pickup_date_string', '$return_date_string', $rental_days, $total_cost, NOW())";
-//       mysqli_query($conn, $query);
-
-//       // Update the availability of the car
-//       $query = "UPDATE tblAvailability SET available = 0 WHERE car_id = $car_id AND pickup_date <= '$pickup_date_string' AND return_date >= '$return_date_string'";
-//       mysqli_query($conn, $query);
-
-//       // Redirect the user to the confirmation page
-//       header("Location: reservation_status.php");
-//       exit();
-//    }
-// }
-
-// // Get the car options from the database
-// $query = "SELECT car_id, brand, model, daily_rate FROM tblCar";
-// $result = mysqli_query($conn, $query);
-// $options = "";
-// while ($row = mysqli_fetch_assoc($result)) {
-//    $options .= "<option value='" . $row['car_id'] . "'>" . $row['brand'] . " " . $row['model'] . " (Php" . $row['daily_rate'] . "/day)</option>";
-// }
-?>
-
-<?php
 // Connect to the database
 $conn = mysqli_connect("localhost", "root", "", "dbbriskvrs");
 
@@ -164,27 +83,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
          $total_cost = $row['daily_rate'] * $rental_days;
       }
 
-      $query = "SELECT COUNT(*) AS count FROM tblAvailability
-          WHERE car_id = $car_id
-          AND pickup_date <= '$return_date_string'
-          AND return_date >= '$pickup_date_string'
-          AND available = 1";
-      $result = mysqli_query($conn, $query);
-      $row = mysqli_fetch_assoc($result);
-      $count = $row['count'];
-      if ($count > 0) {
-         die("Selected car is not available for the selected dates");
-      }
-
       // Insert the reservation data into the database
       $query = "INSERT INTO tblReservation (user_id, car_id, destination, pickup_date, return_date, rental_days, total_cost, reservation_date)
                  VALUES ($user_id, $car_id, '$destination', '$pickup_date_string', '$return_date_string', $rental_days, $total_cost, NOW())";
       mysqli_query($conn, $query);
 
-      $query = "UPDATE tblAvailability SET available = 0
-      WHERE car_id = $car_id
-      AND pickup_date <= '$return_date_string'
-      AND return_date >= '$pickup_date_string'";
+      // Update the availability of the car
+      $query = "UPDATE tblAvailability SET available = 0 WHERE car_id = $car_id AND pickup_date <= '$pickup_date_string' AND return_date >= '$return_date_string'";
       mysqli_query($conn, $query);
 
       // Redirect the user to the confirmation page
@@ -435,11 +340,11 @@ while ($row = mysqli_fetch_assoc($result)) {
                               <label for="select-box1" class="label select-box1"><span class="label-desc">Select your
                                     car type</span></label>
                               <select id="select-box1" class="select" name="model">
-                                 <option value=""> </option>
                                  <?php echo $options; ?>
                               </select>
                            </div>
                         </div>
+
                         <div class="col-md-12">
                            <div class="pick_d">
                               <i class="fa fa-map-marker" aria-hidden="true"></i>

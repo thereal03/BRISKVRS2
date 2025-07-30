@@ -19,24 +19,7 @@ if (isset($_POST['send'])) {
       header("Location: Error.php");
       exit();
    }
-}
-?>
 
-<?php
-// Connect to the database
-$conn = mysqli_connect("localhost", "root", "", "dbbriskvrs");
-
-// Check connection
-if (!$conn) {
-   die("Connection failed: " . mysqli_connect_error());
-}
-
-// Get the car options from the database
-$query = "SELECT car_id, brand, model, daily_rate FROM tblCar";
-$result = mysqli_query($conn, $query);
-$options = "";
-while ($row = mysqli_fetch_assoc($result)) {
-   $options .= "<option value='" . $row['car_id'] . "'>" . $row['brand'] . " " . $row['model'] . " (Php" . $row['daily_rate'] . "/day)</option>";
 }
 mysqli_close($conn);
 ?>
@@ -73,10 +56,216 @@ mysqli_close($conn);
    <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+
+   <style>
+      table {
+         border-collapse: collapse;
+         width: 100%;
+         max-width: 1000px;
+         margin: 0 auto;
+         font-family: Arial, sans-serif;
+         font-size: 16px;
+      }
+
+      table th,
+      table td {
+         padding: 10px;
+         border: 1px solid #ccc;
+      }
+
+      table th {
+         font-weight: bold;
+         text-align: center;
+      }
+
+      table tr:nth-child(even) {
+         background-color: #fbf8f1;
+      }
+
+      table tr:hover {
+         background-color: #ddd;
+      }
+
+      h1 {
+         margin-top: 30px;
+         margin-bottom: 20px;
+         text-align: center;
+         font-size: 64px;
+      }
+
+      /* Modal Styles */
+      .modal {
+         display: block;
+         position: fixed;
+         z-index: 10000;
+         left: 0;
+         top: 0;
+         width: 100%;
+         height: 100%;
+         overflow: auto;
+         background-color: rgba(0, 0, 0, 0.8);
+         animation: fadeIn 0.3s ease-in;
+      }
+
+      .modal-content {
+         background-color: #ffffff;
+         margin: 5% auto;
+         padding: 25px;
+         border: none;
+         border-radius: 15px;
+         width: 90%;
+         max-width: 550px;
+         max-height: 85vh;
+         overflow-y: auto;
+         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+         animation: slideIn 0.3s ease-out;
+         position: relative;
+      }
+
+      .close-modal {
+         color: #999;
+         float: right;
+         font-size: 24px;
+         font-weight: bold;
+         position: absolute;
+         right: 15px;
+         top: 10px;
+         cursor: pointer;
+         transition: color 0.3s ease;
+         z-index: 1;
+      }
+
+      .close-modal:hover,
+      .close-modal:focus {
+         color: #333;
+      }
+
+      .modal-header {
+         text-align: center;
+         margin-bottom: 15px;
+         padding-right: 30px;
+      }
+
+      .modal-header h2 {
+         color: #ffc834;
+         font-size: 24px;
+         margin-bottom: 10px;
+         font-family: 'Source Code Pro', monospace;
+      }
+
+      .modal-body {
+         text-align: center;
+         line-height: 1.5;
+      }
+
+      .modal-body p {
+         color: #333;
+         font-size: 14px;
+         margin-bottom: 12px;
+      }
+
+      .modal-body .highlight {
+         background-color: #fff3cd;
+         border: 1px solid #ffeaa7;
+         border-radius: 5px;
+         padding: 12px;
+         margin: 15px 0;
+         font-weight: bold;
+         color: #856404;
+         font-size: 13px;
+      }
+
+      .modal-footer {
+         text-align: center;
+         margin-top: 20px;
+      }
+
+      .btn-understand {
+         background-color: #ffc834;
+         color: #333;
+         padding: 10px 25px;
+         border: none;
+         border-radius: 8px;
+         font-size: 14px;
+         font-weight: bold;
+         cursor: pointer;
+         transition: all 0.3s ease;
+         font-family: 'Source Code Pro', monospace;
+      }
+
+      .btn-understand:hover {
+         background-color: #e6b42e;
+         transform: translateY(-2px);
+         box-shadow: 0 5px 15px rgba(255, 200, 52, 0.4);
+      }
+
+      .project-badge {
+         background: linear-gradient(45deg, #ffc834, #ffdd59);
+         color: #333;
+         padding: 4px 12px;
+         border-radius: 15px;
+         font-size: 11px;
+         font-weight: bold;
+         display: inline-block;
+         margin-bottom: 10px;
+         letter-spacing: 1px;
+         text-transform: uppercase;
+      }
+
+      /* Mobile responsiveness */
+      @media (max-height: 600px) {
+         .modal-content {
+            margin: 2% auto;
+            max-height: 95vh;
+            padding: 20px;
+         }
+
+         .modal-header h2 {
+            font-size: 20px;
+         }
+
+         .modal-body p {
+            font-size: 13px;
+            margin-bottom: 10px;
+         }
+      }
+   </style>
+
 </head>
 <!-- body -->
 
 <body class="main-layout">
+
+   <!-- Project Disclaimer Modal -->
+   <div id="projectModal" class="modal">
+      <div class="modal-content">
+         <span class="close-modal" onclick="closeModal()">&times;</span>
+         <div class="modal-header">
+            <div class="project-badge">🎓 Academic Project</div>
+            <h2>Student Portfolio Showcase</h2>
+         </div>
+         <div class="modal-body">
+            <p><strong>Welcome to BRISK Car Rental System!</strong></p>
+            <p>This is an <strong>educational project</strong> created as part of our academic coursework and is hosted
+               exclusively for <strong>digital portfolio demonstration purposes</strong>.</p>
+
+            <div class="highlight">
+               ⚠️ Please note: This is an early-stage student project with limited functionality and may contain bugs or
+               incomplete features.
+            </div>
+
+            <p>This system was developed to showcase our learning progress in web development and database management.
+               It represents our foundational understanding of PHP, MySQL, and web technologies.</p>
+
+            <p><strong>Purpose:</strong> Academic demonstration and portfolio showcase only</p>
+            <p><strong>Status:</strong> Educational project - not for commercial use</p>
+         </div>
+         <div class="modal-footer">
+            <button class="btn-understand" onclick="closeModal()">I Understand - Continue to Demo</button>
+         </div>
+      </div>
+   </div>
+
    <!-- loader  -->
    <div class="loader_bg">
       <div class="loader"><img src="images/loading.gif" alt="#" /></div>
@@ -267,10 +456,8 @@ mysqli_close($conn);
                               <label for="select-box1" class="label select-box1"><span class="label-desc">Select your
                                     car type</span> </label>
                               <select id="select-box1" class="select" name="car_type">
-                                 <option value=""></option>
                                  <?php echo $options; ?>
                               </select>
-
                            </div>
                         </div>
                         <div class="col-md-12">
@@ -278,17 +465,19 @@ mysqli_close($conn);
                               <i class="fa fa-map-marker" aria-hidden="true"></i>
                               <p>Destination</p>
                            </div>
-                           <input class="form_luxury max_low" placeholder="Enter your destination" type="type"
-                              name="destination">
+                           <input class="form_luxury max_low" placeholder="Enter your city airport" type="type"
+                              name="Enter your city airport">
                         </div>
                         <div class="col-md-6">
                            <label>Picking up date</label>
-                           <input class="form_luxury max_wi" type="datetime-local" name="pickup_date">
+                           <input class="form_luxury max_wi" placeholder="Enter your city airport" type="datetime-local"
+                              name="pickup_date">
                            <div class="cale"><img src="images/calander.png" alt="#" /></div>
                         </div>
                         <div class="col-md-6">
                            <label>Dropping off date</label>
-                           <input class="form_luxury max_wi" type="datetime-local" name="return_date">
+                           <input class="form_luxury max_wi" placeholder="Enter your city airport" type="datetime-local"
+                              name="return_date">
                            <div class="cale"><img type="date" src="images/calander.png" alt="#" /></div>
                         </div>
                         <div class="col-md-12">
@@ -554,7 +743,7 @@ mysqli_close($conn);
    <script src="js/popper.min.js"></script>
    <script src="js/bootstrap.bundle.min.js"></script>
    <script src="js/jquery-3.0.0.min.js"></script>
-   <!-- sidebar -->
+   <!-- sidebar -->zz
    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
    <script src="js/custom.js"></script>
    <script>
@@ -564,6 +753,26 @@ mysqli_close($conn);
 
       function closeNav() {
          document.getElementById("mySidepanel").style.width = "0";
+      }
+
+      function closeModal() {
+         document.getElementById("projectModal").style.display = "none";
+         // Store in localStorage so modal doesn't show again in the same session
+         localStorage.setItem('modalShown', 'true');
+      }
+
+      // Check if modal was already shown in this session
+      window.onload = function () {
+         // Always show modal - comment out the storage check
+         document.getElementById("projectModal").style.display = "block";
+      }
+
+      // Close modal when clicking outside of it
+      window.onclick = function (event) {
+         var modal = document.getElementById("projectModal");
+         if (event.target == modal) {
+            closeModal();
+         }
       }
    </script>
    <script>

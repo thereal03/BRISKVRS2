@@ -1,4 +1,55 @@
 <?php
+// session_start();
+
+// if (isset($_POST['submit'])) {
+
+//     // Connect to the database
+//     $conn = mysqli_connect('localhost', 'root', '', 'dbbriskvrs');
+
+//     if (!$conn) {
+//         die("Connection failed: " . mysqli_connect_error());
+//     }
+
+//     $username = $_POST['username'];
+//     $password = $_POST['password'];
+
+//     // Check if the username and password are correct
+//     $sql = "SELECT * FROM tblUser WHERE username='$username' AND password='$password'";
+//     $result = mysqli_query($conn, $sql);
+
+//     if (mysqli_num_rows($result) == 1) {
+//         // Login successful, retrieve user info
+//         $user = mysqli_fetch_assoc($result);
+
+//         // Store the user info to tblLogin_credential
+//         $user_id = $user['login_credential_id'];
+//         $email = $user['email'];
+//         $sql = "INSERT INTO tblLogin_credential (user_id, username, password, email) VALUES ('$user_id', '$username', '$password', '$email')";
+//         if (mysqli_query($conn, $sql)) {
+//             echo "New record created successfully";
+//         } else {
+//             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+//         }
+
+//         $_SESSION['user_id'] = $user_id;
+
+//         // Retrieve user information from the database
+//         $result = mysqli_query($conn, "SELECT * FROM tbluser WHERE user_id = '$user_id'");
+//         $user = mysqli_fetch_assoc($result);
+//         mysqli_close($conn);
+
+//         // Redirect to Home2.php
+//         header('Location: Home2.php');
+//         exit;
+//     } else {
+//         // Login failed
+//         $error_message = "Invalid username or password";
+//         mysqli_close($conn);
+//     }
+// }
+?>
+
+<?php
 session_start();
 
 if (isset($_POST['submit'])) {

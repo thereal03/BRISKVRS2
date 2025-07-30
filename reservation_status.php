@@ -245,8 +245,9 @@ while ($row = mysqli_fetch_assoc($result)) {
             $query = "DELETE FROM tblReservation WHERE reservation_id = $reservation_id";
             mysqli_query($conn, $query);
 
-            // Show a success message
-            echo "<script>alert('Reservation deleted successfully.');</script>";
+            // Redirect the user to the reservation status page
+            header("Location: reservation_status.php");
+            exit();
         }
 
         // Get the user's reservations from the database
@@ -308,7 +309,6 @@ while ($row = mysqli_fetch_assoc($result)) {
         mysqli_close($conn);
         ?>
     </section>
-    <?php if (!empty($reservation_options)): ?>
     <div id="luxury" class="luxury bottom_cross6">
         <div class="container-fluid">
             <div class="row">
@@ -339,7 +339,6 @@ while ($row = mysqli_fetch_assoc($result)) {
                                         <label for="select-box1" class="label select-box1"><span
                                                 class="label-desc">Select your car type</span></label>
                                         <select id="select-box1" class="select" name="model">
-                                            <option value=""> </option>
                                             <?php
                                             echo $car_options;
                                             ?>
@@ -380,7 +379,6 @@ while ($row = mysqli_fetch_assoc($result)) {
             </div>
         </div>
     </div>
-    <?php endif; ?>
     <!-- end luxury section -->
     <footer>
         <div class="footer bottom_cross1">
